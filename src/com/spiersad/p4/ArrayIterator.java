@@ -13,7 +13,7 @@ public class ArrayIterator<T> implements Iterator<T>{
 
 	@Override
 	public boolean hasNext() {
-		return itList[current+1] != null;
+		return itList[current] != null;
 	}
 
 	@Override

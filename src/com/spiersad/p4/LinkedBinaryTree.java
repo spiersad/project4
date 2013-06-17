@@ -2,6 +2,8 @@ package com.spiersad.p4;
 
 import java.util.Iterator;
 
+import com.spiersad.p4.BinaryTreeIterator.Traveral;
+
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 	protected int count;
 	protected BinaryTreeNode<T> root, current, parent;
@@ -57,20 +59,20 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 
 	@Override
 	public Iterator<T> iteratorInOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, Traveral.LVR);
+		return it;
 	}
 
 	@Override
 	public Iterator<T> iteratorPreOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, Traveral.VLR);
+		return it;
 	}
 
 	@Override
 	public Iterator<T> iteratorPostOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, Traveral.LRV);
+		return it;
 	}
 
 	@Override
