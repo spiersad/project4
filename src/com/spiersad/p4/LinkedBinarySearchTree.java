@@ -40,13 +40,70 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
 				parent.right = temp;
 			count++;
 		}
-		//checkBalance();
 	}
 
 	@Override
-	public T removeElement(T targetElement) {
-		// TODO Auto-generated method stub
-		return null;
+	public T removeElement(T targetElement) throws ElementNotFoundException {
+		search(root, targetElement);
+		if (current == null) throw new ElementNotFoundException();
+		T save = current.element;
+		
+		if (current.left == null && current.right == null){
+			if (current == root)
+				root = null;
+			else if (parent.right == current)
+				parent.right = current = null;
+			else
+				parent.left = current = null;
+		}
+		else if (current.left == null && current.right != null){
+			if(current == root)
+				root = current.right;
+			else if (parent.right == current)
+				parent.right = current.right;
+			else
+				parent.left = current.right;
+		}
+		else if (current.left != null && current.right == null){
+			if(current == root)
+				root = current.left;
+			else if (parent.right == current)
+				parent.right = current.left;
+			else
+				parent.left = current.left;
+		}
+		else if (current.left != null && current.right != null){
+			if (current.right.left == null){
+				current.right.left = current.left;
+				if(current == root)
+					root = current.right;
+				else if (parent.right == current)
+					parent.right = current.right;
+				else
+					parent.left = current.right;
+			}
+			else{
+				BinaryTreeNode<T> tempCurrent = current.right;
+				BinaryTreeNode<T> tempParent = current.right;
+				while (tempCurrent.left != null){
+					tempParent = tempCurrent;
+					tempCurrent = tempCurrent.left;
+				}
+				if (tempCurrent.right != null)
+					tempParent.left = tempCurrent.right;
+				tempCurrent.right = current.right;
+				tempCurrent.left = current.left;
+				if(current == root)
+					root = tempCurrent;
+				else if (parent.right == current)
+					parent.right = tempCurrent;
+				else
+					parent.left = tempCurrent;
+				tempCurrent = tempParent = null;
+			}
+			current = parent = null;
+		}
+		return save;
 	}
 
 	@Override
@@ -77,49 +134,5 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
 	public T findMax() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	protected void checkBalance(){
-
-		root.calculateBalance();
-		parent = grandParent = null;
-		current = root;
-		int left, right;
-		if (current.left == null)
-			left = 0;
-		else
-			left = current.left.balance;
-		if (current.right == null)
-			right = 0;
-		else
-			right = current.right.balance;
-		while (current.balance >= 2 && (left >= 2 || right >= 2)){
-			grandParent = parent;
-			parent = current;
-			if (left > right)
-				current = current.left;
-			else if (left < right)
-				current = current.right;
-			if (current.left == null)
-				left = 0;
-			else
-				left = current.left.balance;
-			if (current.right == null)
-				right = 0;
-			else
-				right = current.right.balance;
-		}
-		/*if (current.balance == 2 && (left == 1 || right == 1)){
-			if (parent == null && left > 0){
-				root = root.left;
-				root.right = current;
-				current.left = null;
-			}
-			else if (parent == null && right > 0){
-				root = root.right;
-				root.left = current;
-				current.right = null;
-			}
-		}*/
 	}
 }

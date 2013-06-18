@@ -30,20 +30,4 @@ public class BinaryTreeNode<T> {
 
 		return count;
 	}
-
-	protected int calculateBalance() {
-
-		int count = 0;
-
-		if (left != null)
-			count = left.calculateBalance() - 1;
-		if (right != null)
-			count = right.calculateBalance() + 1;
-		if (count < 0) 
-			balance = count;
-		else
-			balance = count;
-		return count;
-	}
-
 }

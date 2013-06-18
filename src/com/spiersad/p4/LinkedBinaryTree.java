@@ -82,25 +82,27 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 	}
 
 	protected void search(BinaryTreeNode<T> node, T element){
-		BinaryTreeNode<T> traversal = node;
+		BinaryTreeNode<T> temp = node;
 		current = null;
 		parent = null;
-		if (root.element == element){
+		if (element.equals(root.element)){
 			current = root;
 		}
-		if (traversal.left != null){
-			if (traversal.left == element){
-				current = traversal.left;
-				parent = traversal;
+		if (temp.left != null){
+			if (element.equals(temp.left.element)){
+				current = temp.left;
+				parent = temp;
 			}
-			search(current.left, element);
+			else
+				search(temp.left, element);
 		}
-		if (traversal.right != null){
-			if (traversal.right == element){
-				current = traversal.right;
-				parent = traversal;
+		if (temp.right != null){
+			if (element.equals(temp.right.element)){
+				current = temp.right;
+				parent = temp;
 			}
-			search(traversal.right, element);
+			else
+				search(temp.right, element);
 		}
 	}
 
