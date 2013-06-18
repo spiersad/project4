@@ -1,5 +1,7 @@
 package com.spiersad.p4;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -9,9 +11,8 @@ public class Main {
 
 
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter a sentence of only words, charecters, and spaces");
+		System.out.println("Enter a sentence of only words, characters, and spaces");
 		String in = scanner.nextLine();
-		//scanner.close();
 
 
 		in = in.replaceAll("[^A-Za-z0-9 ]", "").toUpperCase();
@@ -67,12 +68,38 @@ public class Main {
 		}
 		if (in.equals(current.string) == false)
 			System.out.println(in + " not found");
-		scanner.close();
 		
 		it = tree.iteratorInOrder();
 		while(it.hasNext()){
 			Word current1 = it.next();
 			System.out.println("word:  " + current1.string + "\tcount:  " + current1.count);
 		}
+
+        System.out.println("press 1 to print this list to file or anything else to see it again.");
+        int inInt = scanner.nextInt();
+        scanner.close();
+
+        if (inInt == 1){
+            PrintWriter writer = null;
+            try {
+                writer = new PrintWriter("out.txt");
+                it = tree.iteratorInOrder();
+                while(it.hasNext()){
+                    Word crnt = it.next();
+                    writer.println("word:  " + crnt.string + "\tcount:  " + crnt.count);
+                }
+                writer.close();
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            it = tree.iteratorInOrder();
+            while(it.hasNext()){
+                Word current1 = it.next();
+                System.out.println("word:  " + current1.string + "\tcount:  " + current1.count);
+            }
+        }
 	}
 }
