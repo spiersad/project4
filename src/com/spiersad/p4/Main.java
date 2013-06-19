@@ -14,7 +14,7 @@ public class Main {
 		System.out.println("Enter a sentence of only words, characters, and spaces");
 		String in = scanner.nextLine();
 
-
+        //adds all the elements from the input
 		in = in.replaceAll("[^A-Za-z0-9 ]", "").toUpperCase();
 		String[] parts = in.split(" ");
 		for (int i = 0; i < parts.length; i++){
@@ -35,7 +35,7 @@ public class Main {
 		}
 
 
-
+        //shows the current tree of words inorder
 		Iterator<Word> it = tree.iteratorInOrder();
 		while(it.hasNext()){
 			Word current = it.next();
@@ -43,10 +43,9 @@ public class Main {
 		}
 
 
-		
+		//asks for a word to be removed
 		System.out.println("Enter a word to remove");
 		in = scanner.next().toUpperCase();
-
 		it = tree.iteratorInOrder();
 		Word current = null;
 		while (it.hasNext()){
@@ -68,13 +67,16 @@ public class Main {
 		}
 		if (in.equals(current.string) == false)
 			System.out.println(in + " not found");
-		
+
+        //prints the list again
 		it = tree.iteratorInOrder();
 		while(it.hasNext()){
 			Word current1 = it.next();
 			System.out.println("word:  " + current1.string + "\tcount:  " + current1.count);
 		}
 
+
+        //prints the list to file or to terminal
         System.out.println("press 1 to print this list to file or anything else to see it again.");
         int inInt = scanner.nextInt();
         scanner.close();

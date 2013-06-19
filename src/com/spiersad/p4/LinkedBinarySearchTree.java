@@ -1,5 +1,9 @@
 package com.spiersad.p4;
 
+/**
+ * @author Adrian Spiers
+ * @param <T> generic
+ */
 public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinaryTree<T> implements BinarySearchTreeADT<T> {
 
 	protected BinaryTreeNode<T> grandParent;
@@ -12,6 +16,10 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
 		super();
 	}
 
+    /**
+     * adds an element in a binary search tree
+     * @param element to be added
+     */
 	@Override
 	public void addElement(T element) {
 		BinaryTreeNode<T> temp = new BinaryTreeNode<T>();
@@ -42,6 +50,12 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
 		}
 	}
 
+    /**
+     * removes and returns an element from the tree
+     * @param targetElement to be removed
+     * @return element that has been removed
+     * @throws ElementNotFoundException throws an exception if the list is empty
+     */
 	@Override
 	public T removeElement(T targetElement) throws ElementNotFoundException {
 		search(root, targetElement);
@@ -103,6 +117,7 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
 			}
 			current = parent = null;
 		}
+        count--;
 		return save;
 	}
 

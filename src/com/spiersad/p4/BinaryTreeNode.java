@@ -19,6 +19,10 @@ public class BinaryTreeNode<T> {
 		balance = 0;
 	}
 
+    /**
+     * counts the number of children under the current node. This includes all children of all children
+     * @return number of children
+     */
 	public int numChildren() {
 
 		int count = 0;

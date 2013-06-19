@@ -2,24 +2,36 @@ package com.spiersad.p4;
 
 import java.util.Iterator;
 
+/**
+ * @author Adrian Spiers
+ * @param <T> generic
+ */
 public class BinaryTreeIterator<T> implements Iterator<T> {
 	protected BinaryTreeNode<T> node;
 	ArrayUnorderedList<T> list;
 	Iterator<T> listIt;
-	protected enum Traveral {
+	protected enum Traversal {
 		VLR, LVR, LRV;
 	}
 
-	public BinaryTreeIterator(BinaryTreeNode<T> treeNode, Traveral order) {
+	public BinaryTreeIterator(BinaryTreeNode<T> treeNode, Traversal order) {
 		node = treeNode;
 		makelist(order);
 	}
 
+    /**
+     * checks to see if the tree iterator has more elements
+     * @return true if the tree iterator has more elements
+     */
 	@Override
 	public boolean hasNext() {
 		return listIt.hasNext();
 	}
 
+    /**
+     * returns the next element in the iterator
+     * @return the next element in the iterator
+     */
 	@Override
 	public T next() {
 		return listIt.next();
@@ -31,11 +43,11 @@ public class BinaryTreeIterator<T> implements Iterator<T> {
 
 	}
 
-	protected void makelist(Traveral traveral){
+	protected void makelist(Traversal traversal){
 		list = new ArrayUnorderedList<T>();
-		if (traveral == Traveral.VLR)
+		if (traversal == Traversal.VLR)
 			preOrder(node);
-		else if (traveral == Traveral.LVR)
+		else if (traversal == Traversal.LVR)
 			inOrder(node);
 		else 
 			postOrder(node);

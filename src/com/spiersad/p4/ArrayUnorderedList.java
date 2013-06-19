@@ -10,6 +10,10 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
 		super(arraysize);
 	}
 
+    /**
+     * adds to the front of the list
+     * @param element to be added
+     */
 	@Override
 	public void addToFront(T element) {
 		doubler();
@@ -20,6 +24,10 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
 		index++;
 	}
 
+    /**
+     * adds to the rear of the list
+     * @param element to be added
+     */
 	@Override
 	public void addToRear(T element) {
 		doubler();
@@ -27,6 +35,12 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
 		index++;
 	}
 
+    /**
+     * adds to the list after a specific element
+     * @param element to be added
+     * @param target to be added after
+     * @throws ElementNotFoundException
+     */
 	@Override
 	public void addAfter(T element, T target) throws ElementNotFoundException {
 		doubler();

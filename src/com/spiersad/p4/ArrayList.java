@@ -2,6 +2,10 @@ package com.spiersad.p4;
 
 import java.util.Iterator;
 
+/**
+ * @author Adrian Spiers
+ * @param <T> generic
+ */
 public class ArrayList<T> implements ListADT<T>{
 	final private int DEFAULT_ARRAY = 100;
 	protected T[] list;
@@ -17,6 +21,11 @@ public class ArrayList<T> implements ListADT<T>{
 		index = 0;
 	}
 
+    /**
+     * saves the element in the first slot of the array. It then removes that slot and returns that saved value
+     * @return returns the first object in the array
+     * @throws IndexOutOfBoundsException throws an error if trying to remove from empty list
+     */
 	@Override
 	public T removeFirst() throws IndexOutOfBoundsException {
 		if (index == 0) throw new IndexOutOfBoundsException(list.toString());
@@ -29,6 +38,11 @@ public class ArrayList<T> implements ListADT<T>{
 		return saved;
 	}
 
+    /**
+     * saves the element in the last slot of the array. It then removes that slot and returns that saved value
+     * @return returns the last object in the array
+     * @throws IndexOutOfBoundsException throws an error if trying to remove from empty list
+     */
 	@Override
 	public T removeLast() throws IndexOutOfBoundsException {
 		if (index == 0) throw new IndexOutOfBoundsException(list.toString());
@@ -38,6 +52,13 @@ public class ArrayList<T> implements ListADT<T>{
 		return saved;
 	}
 
+    /**
+     * searches for and saves the element in the  array. It then removes the slot of that element and returns that saved value
+     * @param element element to be removed
+     * @return returns the element that is removed
+     * @throws IndexOutOfBoundsException throws an error if trying to remove from empty list
+     * @throws ElementNotFoundException throws an error if element is not present in the list
+     */
 	@Override
 	public T remove(T element) throws IndexOutOfBoundsException, ElementNotFoundException {
 		if (index == 0) throw new IndexOutOfBoundsException(list.toString());
@@ -59,18 +80,34 @@ public class ArrayList<T> implements ListADT<T>{
 		return saved;
 	}
 
+    /**
+     * returns the first element of the array
+     * @return first element of the array
+     * @throws IndexOutOfBoundsException throws an error if trying to remove from empty list
+     */
 	@Override
 	public T first() throws IndexOutOfBoundsException {
 		if (index == 0) throw new IndexOutOfBoundsException(list.toString());
 		return list[0];
 	}
 
+    /**
+     * returns the last element of the array
+     * @return last element of the array
+     * @throws IndexOutOfBoundsException throws an error if trying to remove from empty list
+     */
 	@Override
 	public T last() throws IndexOutOfBoundsException {
 		if (index == 0) throw new IndexOutOfBoundsException(list.toString());
 		return list[index-1];
 	}
 
+    /**
+     * searches for the target and returns true if it is there
+     * @param target element being searched for
+     * @return true if element is in the list else false
+     * @throws IndexOutOfBoundsException throws an error if trying to remove from empty list
+     */
 	@Override
 	public boolean contains(T target) throws IndexOutOfBoundsException {
 		if (index == 0) throw new IndexOutOfBoundsException(list.toString());
@@ -84,22 +121,38 @@ public class ArrayList<T> implements ListADT<T>{
 		return false;
 	}
 
+    /**
+     * checks if empty
+     * @return true if empty
+     */
 	@Override
 	public boolean isEmpty() {
 		return index == 0;
 	}
 
+    /**
+     * checks size of list
+     * @return size of list
+     */
 	@Override
 	public int size() {
 		return index;
 	}
 
+    /**
+     * Creates a new iterator of type ArrayIterator
+     * @return the created iterator
+     */
 	@Override
 	public Iterator<T> iterator() {
 		ArrayIterator<T> it = new ArrayIterator<T>(list);
 		return it;
 	}
 
+    /**
+     * converts the list to a string and returns it
+     * @return the built string
+     */
 	@Override
 	public String toString(){
 		StringBuffer buffer = new StringBuffer();
@@ -109,7 +162,10 @@ public class ArrayList<T> implements ListADT<T>{
 		}
 		return buffer.toString();
 	}
-	
+
+    /**
+     * will double the array in case of running out of room
+     */
 	protected void doubler() {
 		if (list.length == index-1){
 			T[] temp = (T[]) new Object[list.length*2];

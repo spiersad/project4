@@ -2,8 +2,10 @@ package com.spiersad.p4;
 
 import java.util.Iterator;
 
-import com.spiersad.p4.BinaryTreeIterator.Traveral;
-
+/**
+ * @author Adrian Spiers
+ * @param <T> generic
+ */
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 	protected int count;
 	protected BinaryTreeNode<T> root, current, parent;
@@ -13,6 +15,10 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 		count = 0;
 	}
 
+    /**
+     * removes the roots left sub tree
+     * @throws ElementNotFoundException throws an exception if the roots left sub tree is empty
+     */
 	@Override
 	public void removeLeftSubtree() throws ElementNotFoundException {
 		if (root.left == null)throw new ElementNotFoundException();
@@ -20,6 +26,10 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 		root.left = null;
 	}
 
+    /**
+     * removes the roots left sub tree
+     * @throws ElementNotFoundException throws an exception if the roots right sub tree is empty
+     */
 	@Override
 	public void removeRightSubtree() throws ElementNotFoundException {
 		if (root.right == null)throw new ElementNotFoundException();
@@ -27,6 +37,10 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 		root.right = null;		
 	}
 
+    /**
+     * removes all the elements from the tree
+     * @throws ElementNotFoundException throws an exception if the tree is empty
+     */
 	@Override
 	public void removeAllElements() throws ElementNotFoundException {
 		if (root == null)throw new ElementNotFoundException();
@@ -34,22 +48,41 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 		count = 0;
 	}
 
+    /**
+     * checks the tree to see if it is empty
+     * @return true if empty
+     */
 	@Override
 	public boolean isEmpty() {
 		return count == 0;
 	}
 
+    /**
+     * returns the number of elements in the tree
+     * @return count of all elements in the tree
+     */
 	@Override
 	public int size() {
 		return count;
 	}
 
+    /**
+     * searches the tree for a specific element
+     * @param targetElement to be searched for
+     * @return true if the tree contains the element
+     */
 	@Override
 	public boolean contains(T targetElement) {
 		search(root, targetElement);
 		return (current != null);
 	}
 
+    /**
+     * searches the tree for a specific element and returns it
+     * @param targetElement to be searched for
+     * @return the element being searched for
+     * @throws ElementNotFoundException throws exception if the tree does not contain the element
+     */
 	@Override
 	public T find(T targetElement) throws ElementNotFoundException {
 		search(root, targetElement);
@@ -57,21 +90,33 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 		return current.element;
 	}
 
+    /**
+     * creates an inorder iterator
+     * @return the created iterator
+     */
 	@Override
 	public Iterator<T> iteratorInOrder() {
-		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, Traveral.LVR);
+		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, BinaryTreeIterator.Traversal.LVR);
 		return it;
 	}
 
+    /**
+     * creates an preorder iterator
+     * @return the created iterator
+     */
 	@Override
 	public Iterator<T> iteratorPreOrder() {
-		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, Traveral.VLR);
+		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, BinaryTreeIterator.Traversal.VLR);
 		return it;
 	}
 
+    /**
+     * creates an postorder iterator
+     * @return the created iterator
+     */
 	@Override
 	public Iterator<T> iteratorPostOrder() {
-		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, Traveral.LRV);
+		BinaryTreeIterator<T> it = new BinaryTreeIterator<T>(root, BinaryTreeIterator.Traversal.LRV);
 		return it;
 	}
 
@@ -81,6 +126,11 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>{
 		return null;
 	}
 
+    /**
+     * generic search for binary trees. When it finds the element it leaves current on the element and parent above it
+     * @param node to be searched from
+     * @param element to be searched for
+     */
 	protected void search(BinaryTreeNode<T> node, T element){
 		BinaryTreeNode<T> temp = node;
 		current = null;
